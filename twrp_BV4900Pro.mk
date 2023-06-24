@@ -6,11 +6,14 @@
 #
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_arm64.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_system.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 # Inherit some common twrp stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
@@ -24,12 +27,9 @@ PRODUCT_BRAND := Blackview
 PRODUCT_MODEL := BV4900Pro
 PRODUCT_MANUFACTURER := Blackview
 
-# Add fingerprint from Stock ROM build.prop
-# These lines are from my device. You MUST Replace yours.
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BUILD_FINGERPRINT="Blackview/BV4900Pro_RU/BV4900Pro:12/SP1A.210812.016/1679576071:user/release-keys" \
+    TARGET_DEVICE=BV4900Pro \
+    PRODUCT_NAME=BV4900Pro \
     PRIVATE_BUILD_DESC="sys_mssi_64_ww-user 12 SP1A.210812.016 1rck61v164bspP36 release-keys"
 
-# HACK: Set vendor patch level
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.security_patch=2099-12-31
+BUILD_FINGERPRINT := Blackview/BV4900Pro/BV4900Pro:12/SP1A.210812.016/1679576071:user/release-keys
